@@ -1,0 +1,1 @@
+﻿[assembly: InternalsVisibleTo("PollutionPatrol.Modules.UserAccess.Infrastructure")]

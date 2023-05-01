@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
+        <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\BuildingBlocks\PollutionPatrol.BuildingBlocks.Infrastructure\PollutionPatrol.BuildingBlocks.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Modules\Admin\PollutionPatrol.Modules.Admin.Infrastructure\PollutionPatrol.Modules.Admin.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Modules\Monitoring\PollutionPatrol.Modules.Monitoring.Infrastructure\PollutionPatrol.Modules.Monitoring.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Modules\Organization\PollutionPatrol.Modules.Organization.Infrastructure\PollutionPatrol.Modules.Organization.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Modules\Pollution\PollutionPatrol.Modules.Pollution.Infrastructure\PollutionPatrol.Modules.Pollution.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Modules\Staff\PollutionPatrol.Modules.Staff.Infrastructure\PollutionPatrol.Modules.Staff.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Modules\Support\PollutionPatrol.Modules.Support.Infrastructure\PollutionPatrol.Modules.Support.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Modules\UserAccess\PollutionPatrol.Modules.UserAccess.Infrastructure\PollutionPatrol.Modules.UserAccess.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
