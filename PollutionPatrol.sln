@@ -78,6 +78,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FileAccess", "FileAccess", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{1A5B0E49-D529-40A2-90F7-0C127FAC1D98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollutionPatrol.BuildingBlocks.Notification.Abstractions", "src\BuildingBlocks\Notification\PollutionPatrol.BuildingBlocks.Notification.Abstractions\PollutionPatrol.BuildingBlocks.Notification.Abstractions.csproj", "{D9612B53-3AD2-482C-BEE2-771F07A8DFCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollutionPatrol.BuildingBlocks.Notification.Email", "src\BuildingBlocks\Notification\PollutionPatrol.BuildingBlocks.Notification.Email\PollutionPatrol.BuildingBlocks.Notification.Email.csproj", "{ADC687E1-4924-481D-8285-9567DD658304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -122,6 +126,8 @@ Global
 		{EE5D6277-A22E-4A13-BD12-47551A342000} = {A7DEB546-3FD4-4A81-9AFD-A3A7DC774562}
 		{04B6B44B-9E3A-4C0E-97BE-093C6EC0B2A7} = {A7DEB546-3FD4-4A81-9AFD-A3A7DC774562}
 		{1A5B0E49-D529-40A2-90F7-0C127FAC1D98} = {A7DEB546-3FD4-4A81-9AFD-A3A7DC774562}
+		{D9612B53-3AD2-482C-BEE2-771F07A8DFCC} = {1A5B0E49-D529-40A2-90F7-0C127FAC1D98}
+		{ADC687E1-4924-481D-8285-9567DD658304} = {1A5B0E49-D529-40A2-90F7-0C127FAC1D98}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4EF9342F-DBF2-4535-A147-06F61EF6B127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -224,5 +230,13 @@ Global
 		{3BFC2AD4-9B07-4948-8CA6-8DD9F2B29FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BFC2AD4-9B07-4948-8CA6-8DD9F2B29FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BFC2AD4-9B07-4948-8CA6-8DD9F2B29FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9612B53-3AD2-482C-BEE2-771F07A8DFCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9612B53-3AD2-482C-BEE2-771F07A8DFCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9612B53-3AD2-482C-BEE2-771F07A8DFCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9612B53-3AD2-482C-BEE2-771F07A8DFCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC687E1-4924-481D-8285-9567DD658304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC687E1-4924-481D-8285-9567DD658304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC687E1-4924-481D-8285-9567DD658304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC687E1-4924-481D-8285-9567DD658304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
