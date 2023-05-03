@@ -21,5 +21,6 @@ public static class DependencyInjection
         services.AddScoped<IUserAccessDbContext, UserAccessDbContext>();
         services.AddScoped<IEmailValidator, EmailValidator>();
         services.AddScoped<IPasswordManager, PasswordManager>();
+        services.AddScoped<IConfirmationCodeGenerator, ConfirmationCodeGenerator>();
     }
 }
