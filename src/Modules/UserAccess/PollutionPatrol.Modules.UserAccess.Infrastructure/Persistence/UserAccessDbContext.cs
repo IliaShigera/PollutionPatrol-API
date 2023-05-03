@@ -10,6 +10,9 @@ internal sealed class UserAccessDbContext : DbContext, IUserAccessDbContext
         _eventsDispatcher = eventsDispatcher;
     }
 
+    public DbSet<UserRegistration> Registrations { get; private set; }
+    public DbSet<ApplicationUser> Users { get; private set; }
+
     public async Task CommitAsync(CancellationToken cancellationToken = default)
     {
         await SaveChangesAsync(cancellationToken);
@@ -20,6 +23,8 @@ internal sealed class UserAccessDbContext : DbContext, IUserAccessDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new EntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new UserRegistrationEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ApplicationUserEntityTypeConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 }

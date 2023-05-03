@@ -14,5 +14,7 @@ global using PollutionPatrol.Modules.UserAccess.Application.Contracts;
 global using PollutionPatrol.Modules.UserAccess.Application.SeedWork.Command;
 global using PollutionPatrol.Modules.UserAccess.Application.SeedWork.Pipelines;
 global using PollutionPatrol.Modules.UserAccess.Application.SeedWork.Query;
+global using PollutionPatrol.Modules.UserAccess.Domain.AppUser;
+global using PollutionPatrol.Modules.UserAccess.Domain.Registration;
 global using PollutionPatrol.Modules.UserAccess.Infrastructure.Persistence;
 global using PollutionPatrol.Modules.UserAccess.Infrastructure.Persistence.EntityTypeConfigurations;
