@@ -2,13 +2,13 @@
 
 public static class DependencyInjection
 {
-    public static void AddEmailNotifications(IServiceCollection services)
+    public static void AddEmailNotifications(this IServiceCollection services)
     {
         services.AddOptions<EmailOptions>()
             .BindConfiguration(EmailOptions.Section)
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
-        services.AddScoped<INotificationSender<EmailNotificationMessage>, EmailNotificationSender>();
+        services.AddScoped<IEmailNotificationSender, EmailNotificationSender>();
     }
 }

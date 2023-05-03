@@ -1,6 +1,6 @@
 ﻿namespace PollutionPatrol.BuildingBlocks.Notification.Email;
 
-internal sealed class EmailNotificationSender : INotificationSender<EmailNotificationMessage>
+internal sealed class EmailNotificationSender : IEmailNotificationSender
 {
     private readonly EmailOptions _emailOptions;
 

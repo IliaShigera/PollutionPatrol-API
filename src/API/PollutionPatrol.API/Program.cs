@@ -41,6 +41,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
     // configure modules
     services.AddBuildingBlocks(configuration);
+    services.AddEmailNotifications();
     services.AddUserAccessModule(configuration);
 }
 
