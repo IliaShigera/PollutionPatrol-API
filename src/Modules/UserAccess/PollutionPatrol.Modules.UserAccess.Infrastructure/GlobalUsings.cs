@@ -1,6 +1,7 @@
 ﻿// Global using directives
 
 global using System.Reflection;
+global using System.Security.Cryptography;
 global using FluentValidation;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
@@ -19,3 +20,4 @@ global using PollutionPatrol.Modules.UserAccess.Domain.Registration;
 global using PollutionPatrol.Modules.UserAccess.Infrastructure.Domain;
 global using PollutionPatrol.Modules.UserAccess.Infrastructure.Persistence;
 global using PollutionPatrol.Modules.UserAccess.Infrastructure.Persistence.EntityTypeConfigurations;
+global using PollutionPatrol.Modules.UserAccess.Infrastructure.Security;
