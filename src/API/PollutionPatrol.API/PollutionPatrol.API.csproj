@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
+      <UserSecretsId>6a068939-f420-4625-8fc6-a787e8910bff</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
@@ -13,6 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\BuildingBlocks\Notification\PollutionPatrol.BuildingBlocks.Notification.Email\PollutionPatrol.BuildingBlocks.Notification.Email.csproj" />
       <ProjectReference Include="..\..\BuildingBlocks\PollutionPatrol.BuildingBlocks.Infrastructure\PollutionPatrol.BuildingBlocks.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Modules\Admin\PollutionPatrol.Modules.Admin.Infrastructure\PollutionPatrol.Modules.Admin.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Modules\Monitoring\PollutionPatrol.Modules.Monitoring.Infrastructure\PollutionPatrol.Modules.Monitoring.Infrastructure.csproj" />
