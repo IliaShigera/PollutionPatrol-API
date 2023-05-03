@@ -19,5 +19,6 @@ public static class DependencyInjection
 
         services.AddTransient<IUserAccessModule, UserAccessModule>();
         services.AddScoped<IUserAccessDbContext, UserAccessDbContext>();
+        services.AddScoped<IEmailValidator, EmailValidator>();
     }
 }
