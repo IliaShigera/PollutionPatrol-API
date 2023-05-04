@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\BuildingBlocks\Notification\PollutionPatrol.BuildingBlocks.Notification.Abstractions\PollutionPatrol.BuildingBlocks.Notification.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\PollutionPatrol.BuildingBlocks.Application\PollutionPatrol.BuildingBlocks.Application.csproj" />
       <ProjectReference Include="..\PollutionPatrol.Modules.UserAccess.Domain\PollutionPatrol.Modules.UserAccess.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features" />
       <Folder Include="SeedWork" />
     </ItemGroup>
 

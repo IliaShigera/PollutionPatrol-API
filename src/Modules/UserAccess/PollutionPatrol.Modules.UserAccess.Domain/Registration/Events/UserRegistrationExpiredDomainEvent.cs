@@ -2,7 +2,12 @@ namespace PollutionPatrol.Modules.UserAccess.Domain.Registration.Events;
 
 public sealed class UserRegistrationExpiredDomainEvent : IDomainEvent
 {
-    internal UserRegistrationExpiredDomainEvent(UserRegistration registration) => Registration = registration;
+    internal UserRegistrationExpiredDomainEvent(string firstName, string emailAddress)
+    {
+        FirstName = firstName;
+        EmailAddress = emailAddress;
+    }
 
-    public UserRegistration Registration { get; init; }
+    public string FirstName { get; init; }
+    public string EmailAddress { get; init; }
 }

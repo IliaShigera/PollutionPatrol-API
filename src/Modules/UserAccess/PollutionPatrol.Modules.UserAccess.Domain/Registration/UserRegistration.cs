@@ -78,6 +78,6 @@ public sealed class UserRegistration : Entity
 
         Status = RegistrationStatus.Expired;
 
-        AddDomainEvent(new UserRegistrationExpiredDomainEvent(this));
+        AddDomainEvent(new UserRegistrationExpiredDomainEvent(FirstName, EmailAddress));
     }
 }
