@@ -17,6 +17,26 @@ public static class DependencyInjection
 
         services.AddValidatorsFromAssembly(Assembly.Load("PollutionPatrol.Modules.UserAccess.Application"), includeInternalTypes: true);
 
+        services.AddQuartz(q =>
+        {
+            q.SchedulerName = "UserAccess-Scheduler";
+            q.UseMicrosoftDependencyInjectionJobFactory();
+
+            q.ScheduleJob<ExpireRegistrationJob>(trigger => trigger
+                .WithIdentity("ExpireRegistration-Job", "UserAccess-Group")
+                .StartAt(DateTimeOffset.Now.AddSeconds(30))
+                .WithCronSchedule("0 */4 * ? * *") // every 4th hour (0:00, 4:00, 8:00, 12:00, 16:00, 20:00).
+                .WithDescription("Executes a command to expire registration records in the database based on a given expiration date.")
+            );
+
+            q.InterruptJobsOnShutdown = true;
+            q.InterruptJobsOnShutdownWithWait = true;
+        });
+
+        services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+        services.AddTransient<ExpireRegistrationJob>();
+
         services.AddTransient<IUserAccessModule, UserAccessModule>();
         services.AddScoped<IUserAccessDbContext, UserAccessDbContext>();
         services.AddScoped<IEmailValidator, EmailValidator>();
