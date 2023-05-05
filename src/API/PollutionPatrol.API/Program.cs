@@ -14,7 +14,7 @@ try
         .Enrich.FromLogContext()
         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
         .WriteTo.File(new CompactJsonFormatter(), "logs/logs"));
-    
+
     // Add services to the container.
     ConfigureServices(builder.Services, builder.Configuration);
     var app = builder.Build();
@@ -39,7 +39,16 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
     services.AddCurrentUserAccessor();
 
-    // configure modules
+    services.AddCors(options =>
+    {
+        options.AddDefaultPolicy(builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    });
+
     services.AddBuildingBlocks(configuration);
     services.AddEmailNotifications();
     services.AddUserAccessModule(configuration);
@@ -50,8 +59,7 @@ void Configure(WebApplication app)
 {
     if (app.Environment.IsDevelopment())
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerDoc();
     }
 
     app.UseSerilogRequestLogging();
@@ -59,6 +67,8 @@ void Configure(WebApplication app)
     app.UseGlobalExceptionHandler();
 
     app.UseHttpsRedirection();
+    
+    app.UseCors();
 
     app.UseAuthentication();
     app.UseAuthorization();
