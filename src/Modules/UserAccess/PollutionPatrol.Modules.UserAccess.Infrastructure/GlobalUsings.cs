@@ -1,6 +1,9 @@
 ﻿// Global using directives
 
+global using System.ComponentModel.DataAnnotations;
+global using System.IdentityModel.Tokens.Jwt;
 global using System.Reflection;
+global using System.Security.Claims;
 global using System.Security.Cryptography;
 global using System.Text;
 global using FluentValidation;
@@ -10,8 +13,11 @@ global using Microsoft.EntityFrameworkCore.Design;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Options;
+global using Microsoft.IdentityModel.Tokens;
 global using PollutionPatrol.BuildingBlocks.Domain.Models;
 global using PollutionPatrol.BuildingBlocks.Infrastructure.DomainEventsDispatching;
+global using PollutionPatrol.Modules.UserAccess.Application.Constants;
 global using PollutionPatrol.Modules.UserAccess.Application.Contracts;
 global using PollutionPatrol.Modules.UserAccess.Application.Features.Registration.Expiration;
 global using PollutionPatrol.Modules.UserAccess.Application.SeedWork.Command;

@@ -4,6 +4,11 @@ public static class DependencyInjection
 {
     public static void AddUserAccessModule(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddOptions<JwtOptions>()
+            .BindConfiguration(JwtOptions.SectionName)
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         var connection = configuration.GetConnectionString("UserAccess");
 
         services.AddDbContext<UserAccessDbContext>(options =>
@@ -42,5 +47,6 @@ public static class DependencyInjection
         services.AddScoped<IEmailValidator, EmailValidator>();
         services.AddScoped<IPasswordManager, PasswordManager>();
         services.AddScoped<IConfirmationCodeGenerator, ConfirmationCodeGenerator>();
+        services.AddScoped<ITokenClaimsService, TokenClaimsService>();
     }
 }

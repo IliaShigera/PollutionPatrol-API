@@ -35,8 +35,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 {
     services.AddControllers();
     services.AddEndpointsApiExplorer();
-    services.AddSwaggerGen();
-
+    services.AddSwaggerDoc();
     services.AddCurrentUserAccessor();
 
     services.AddCors(options =>
@@ -48,6 +47,8 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
                 .AllowAnyMethod();
         });
     });
+
+    services.AddJwtAuthorization(configuration);
 
     services.AddBuildingBlocks(configuration);
     services.AddEmailNotifications();
@@ -67,7 +68,7 @@ void Configure(WebApplication app)
     app.UseGlobalExceptionHandler();
 
     app.UseHttpsRedirection();
-    
+
     app.UseCors();
 
     app.UseAuthentication();
