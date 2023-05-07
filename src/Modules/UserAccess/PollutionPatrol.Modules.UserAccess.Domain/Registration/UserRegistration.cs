@@ -80,4 +80,11 @@ public sealed class UserRegistration : Entity
 
         AddDomainEvent(new UserRegistrationExpiredDomainEvent(FirstName, EmailAddress));
     }
+
+    public ApplicationUser CreateUser()
+    {
+        CheckRule(new RegistrationMustBeConfirmedDomainRule(Status));
+
+        return ApplicationUser.CreateFromRegistration(this);
+    }
 }
