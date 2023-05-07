@@ -25,6 +25,7 @@ public sealed class ApplicationUser : Entity
     public string EmailAddress { get; private set; }
     public string PasswordHash { get; private set; }
     public string Salt { get; private set; }
+    public RefreshToken? RefreshToken { get; private set; }
     public List<UserRole> Roles { get; private set; }
 
     internal static ApplicationUser CreateFromRegistration(UserRegistration registration)
@@ -46,4 +47,6 @@ public sealed class ApplicationUser : Entity
             salt,
             roles: new List<UserRole> { UserRole.Admin });
     }
+
+    public void UpdateRefreshToken(RefreshToken? refreshToken) => RefreshToken = refreshToken;
 }

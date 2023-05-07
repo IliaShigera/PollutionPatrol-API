@@ -35,17 +35,26 @@ public class GlobalExceptionHandlerMiddleware
             AuthenticationException exception => new ProblemDetails
             {
                 Title = "Unauthenticated",
-                Type = "https://www.rfc-editor.org/rfc/rfc7231#section-6.5.3",
+                Type = "https://www.rfc-editor.org/rfc/rfc7235#section-3.1",
                 Detail = exception.Details,
-                Status = StatusCodes.Status403Forbidden,
+                Status = StatusCodes.Status401Unauthorized,
                 Instance = context.Request.Path
             },
 
             AuthorizationException => new ProblemDetails
             {
                 Title = "Unauthorized",
-                Type = "https://www.rfc-editor.org/rfc/rfc7235#section-3.1",
+                Type = "https://www.rfc-editor.org/rfc/rfc7231#section-6.5.3",
                 Detail = "The request requires user authorization.",
+                Status = StatusCodes.Status403Forbidden,
+                Instance = context.Request.Path
+            },
+
+            SecurityTokenException => new ProblemDetails
+            {
+                Title = "Invalid or expired security token",
+                Type = "https://www.rfc-editor.org/rfc/rfc7235#section-3.1",
+                Detail = "The provided security token is invalid or has expired.",
                 Status = StatusCodes.Status401Unauthorized,
                 Instance = context.Request.Path
             },

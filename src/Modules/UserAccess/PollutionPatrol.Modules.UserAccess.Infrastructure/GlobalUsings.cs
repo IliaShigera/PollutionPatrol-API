@@ -15,6 +15,7 @@ global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Options;
 global using Microsoft.IdentityModel.Tokens;
+global using PollutionPatrol.BuildingBlocks.Application.Exceptions;
 global using PollutionPatrol.BuildingBlocks.Domain.Models;
 global using PollutionPatrol.BuildingBlocks.Infrastructure.DomainEventsDispatching;
 global using PollutionPatrol.Modules.UserAccess.Application.Constants;

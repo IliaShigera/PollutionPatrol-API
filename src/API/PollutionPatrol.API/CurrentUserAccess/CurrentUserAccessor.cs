@@ -15,8 +15,8 @@ internal sealed class CurrentUserAccessor : ICurrentUserAccessor
             var idString = _httpContextAccessor.HttpContext?.User.FindFirst(CustomClaimTypes.UserId)?.Value;
 
             if (string.IsNullOrWhiteSpace(idString))
-                throw new AuthenticationException();
-
+                throw new AuthenticationException(details: "User is not authenticated.");
+            
             Guid.TryParse(idString, out Guid id);
 
             return id;
