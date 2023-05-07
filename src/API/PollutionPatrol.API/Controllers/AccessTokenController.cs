@@ -1,13 +1,13 @@
 namespace PollutionPatrol.API.Controllers;
 
 [ApiController]
+[AllowAnonymous]
 public sealed class AccessTokenController : ApiController
 {
     private readonly IUserAccessModule _userAccessModule;
 
     public AccessTokenController(IUserAccessModule userAccessModule) => _userAccessModule = userAccessModule;
 
-    [AllowAnonymous]
     [HttpPost("api/token/refresh")]
     public async Task<IActionResult> RefreshAccessTokenAsync([FromBody] RefreshTokenRequest request)
     {
@@ -15,7 +15,6 @@ public sealed class AccessTokenController : ApiController
         return Ok(authenticationDto);
     }
 
-    [Authorize]
     [HttpPost("api/token/revoke")]
     public async Task<IActionResult> RevokeRefreshToken()
     {

@@ -29,7 +29,7 @@ internal sealed class TokenClaimsService : ITokenClaimsService
             Subject = new ClaimsIdentity(claims.ToArray()),
             Issuer = _jwtOptions.Issuer,
             Audience = _jwtOptions.Audience,
-            Expires = DateTime.Now.AddMinutes(_jwtOptions.AccessTokenExpirationTimeInMinutes),
+            Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.AccessTokenExpirationTimeInMinutes),
             SigningCredentials = signinCredentials
         };
 
@@ -50,9 +50,10 @@ internal sealed class TokenClaimsService : ITokenClaimsService
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
-            ValidateLifetime = true,
-            ClockSkew = TimeSpan.Zero,
-            IssuerSigningKey = secretKey
+            ValidateLifetime = false,
+            ValidIssuer = _jwtOptions.Issuer,
+            ValidAudience = _jwtOptions.Audience,
+            IssuerSigningKey = secretKey,
         };
 
         var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
@@ -68,7 +69,7 @@ internal sealed class TokenClaimsService : ITokenClaimsService
         var claim = principal.FindFirst(CustomClaimTypes.UserId);
         if (claim is null)
             throw new SecurityTokenException("User ID claim not found in token.");
-        
+
         if (!Guid.TryParse(claim.Value, out var userId))
             throw new SecurityTokenException("User ID claim has invalid value.");
 
@@ -82,8 +83,8 @@ internal sealed class TokenClaimsService : ITokenClaimsService
         rng.GetBytes(randomNumber);
         return new RefreshToken(
             value: Convert.ToBase64String(randomNumber),
-            creationDate: DateTime.UtcNow.Date,
-            expirationDate: DateTime.UtcNow.Date.AddDays(_jwtOptions.RefreshTokenExpirationTimeInDays)
+            creationDate: DateTime.UtcNow,
+            expirationDate: DateTime.UtcNow.AddDays(_jwtOptions.RefreshTokenExpirationTimeInDays)
         );
     }
 }

@@ -11,7 +11,7 @@ public sealed class RegistrationController : ApiController
     [HttpPost("api/registration")]
     public async Task<ActionResult> RegisterNewUserAsync([FromBody] RegistrationRequest request)
     {
-        await _userAccessModule.ExecuteCommandAsync(new RegisterNewUserCommand(request.FirstName, request.Email, request.Password));
+        await _userAccessModule.ExecuteCommandAsync(new RegisterNewUserCommand(request.FirstName, request.EmailAddress, request.Password));
         return Ok();
     }
     

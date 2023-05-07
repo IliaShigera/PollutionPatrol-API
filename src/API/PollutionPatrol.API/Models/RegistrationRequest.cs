@@ -1,3 +1,3 @@
 namespace PollutionPatrol.API.Models;
 
-public record RegistrationRequest(string FirstName, string Email, string Password);
+public record RegistrationRequest(string FirstName, string EmailAddress, string Password);
