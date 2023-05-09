@@ -2,7 +2,7 @@ namespace PollutionPatrol.Modules.UserAccess.Infrastructure.Security;
 
 public sealed class JwtOptions
 {
-    public const string SectionName = "JwtOptions";
+    public const string Section = "Authentication:JWT";
     
     [Required]
     public string SecretKey { get; set; }

@@ -48,7 +48,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
         });
     });
 
-    services.AddJwtAuthorization(configuration);
+    services.AddAuthentication(configuration);
 
     services.AddBuildingBlocks(configuration);
     services.AddEmailNotifications();

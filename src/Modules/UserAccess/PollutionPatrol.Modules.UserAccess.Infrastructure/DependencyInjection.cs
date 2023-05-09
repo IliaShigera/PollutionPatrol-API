@@ -5,7 +5,7 @@ public static class DependencyInjection
     public static void AddUserAccessModule(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddOptions<JwtOptions>()
-            .BindConfiguration(JwtOptions.SectionName)
+            .BindConfiguration(JwtOptions.Section)
             .ValidateDataAnnotations()
             .ValidateOnStart();
 

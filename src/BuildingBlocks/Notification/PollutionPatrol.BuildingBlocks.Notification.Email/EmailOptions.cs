@@ -2,7 +2,7 @@
 
 public sealed class EmailOptions
 {
-    public const string Section = "EmailOptions";
+    public const string Section = "Email";
     
     [Required, EmailAddress]
     public string EmailAddress { get; set; }
