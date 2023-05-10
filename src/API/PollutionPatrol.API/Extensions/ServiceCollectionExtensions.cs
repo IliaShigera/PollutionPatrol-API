@@ -8,10 +8,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICurrentUserAccessor, CurrentUserAccessor>();
     }
 
-    public static void AddJwtAuthorization(this IServiceCollection services, IConfiguration configuration)
+    public static void AddAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         SymmetricSecurityKey secretKey =
-            new(Encoding.UTF8.GetBytes(configuration[$"{JwtOptions.SectionName}:{nameof(JwtOptions.SecretKey)}"]));
+            new(Encoding.UTF8.GetBytes(configuration[$"{JwtOptions.Section}:{nameof(JwtOptions.SecretKey)}"]));
 
         services.AddAuthentication(config =>
         {
@@ -22,8 +22,8 @@ public static class ServiceCollectionExtensions
         {
             options.TokenValidationParameters = new()
             {
-                ValidIssuer = configuration[$"{JwtOptions.SectionName}:{nameof(JwtOptions.Issuer)}"],
-                ValidAudience = configuration[$"{JwtOptions.SectionName}:{nameof(JwtOptions.Issuer)}"],
+                ValidIssuer = configuration[$"{JwtOptions.Section}:{nameof(JwtOptions.Issuer)}"],
+                ValidAudience = configuration[$"{JwtOptions.Section}:{nameof(JwtOptions.Issuer)}"],
                 IssuerSigningKey = secretKey,
                 ValidateIssuer = true,
                 ValidateAudience = true,
