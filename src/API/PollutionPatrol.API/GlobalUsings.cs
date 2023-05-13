@@ -3,6 +3,7 @@
 global using System.Security.Authentication;
 global using System.Security.Claims;
 global using System.Text;
+global using Dropbox.Api;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Mvc;
