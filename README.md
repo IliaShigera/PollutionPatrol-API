@@ -22,20 +22,22 @@ Each module follows the clean architecture pattern with domain infrastructure an
 
 ### **User Access Module:**
 
-- Register new user. Confirm the email address to complete the registration.
-- Social Media Integration: Allow users to log in using their social media accounts such as Facebook, Twitter, or Google to make the registration process easier and more convenient.
-- Provide a JWT token for authorization and authentication.
-- Edit user data such as email, password, etc.
+Handles user registration, authentication, and authorization, including social media integration and JWT token generation and refreshing.
+
+- Registration: User will provide their data to create a new account. They will receive an email to verify their email address.
+- User profile: Once logged in, the user can view and edit their profile information, such as their name, profile picture, and contact information.
+- User roles and permissions: Depending on the user's role, they may have different permissions to access certain features of the application. For example, an administrator may have access to all features, while a regular user may only have access to certain features.
+- Password reset: If the user forgets their password, they can reset it by providing their email address. They will receive an email with instructions on how to reset their password.
 
 ### **Pollution Module:**
 
-- Report pollution: Users can report pollution by providing GPS coordinates and the type of pollution. To complete the report, users must also send evidence media files, such as short videos or photos of the affected area. They can also include a description of the pollution, its severity, and its impact on the environment and people's health.
-- Review report: Real employee or an AI will review the evidence file, check the pollution type, and contact a specialist to assess the cost of cleanup and define the method of cleanup. The pollution report must be fully completed before it can be approved. The designated reviewer can reject the report at any time during the review process. Furthermore, the reviewer may request additional information or evidence to better understand the pollution and its impact on the environment.
-    - Notification system: User who submitted the report will receive a notification regarding the change in report status.
-    - Rejection Notification: If the pollution report has been rejected, the user who sent the report will receive a notification in the app with details about why their report was rejected. The email may include suggestions on how to improve the report or provide additional evidence to better understand the issue.
-    - Approval Notification: If the pollution report has been approved, it will be marked as such in the app or website, and the user who sent the report will receive a notification in the app that their report has been approved. Then, the pollution entity will be created and filled out by a reviewer who has all the necessary information, including the type of pollution, its severity, and the source of pollution. The reviewer may also add a description, photos, and videos to provide more information about the pollution.
-        - Cleanup handling: If the pollution is small, it can be cleaned up by a volunteer group. Otherwise, a specific organization should handle it because they have the necessary equipment and experience. For example, volunteer groups can tackle plastic pollution in forests, but plastic pollution in oceans or rivers should be handled by an organization. The organization may also be responsible for determining the best method of cleanup, such as using specialized equipment or chemicals.
-        - Displaying pollution entities: After a new pollution entity has been created, all users and organizations can see it on the map/list and start taking action, such as organizing a volunteer group if it's a small pollution or contributing to a specific organization. Users can also leave comments, suggestions, or ideas on how to tackle the pollution, and the app or website may also provide additional resources or information on the issue.
+Allows users to report pollution, track the progress of cleanup efforts. Includes review by users, rejection or approval notifications, and cleanup handling by volunteers or organizations.
+
+- Report pollution: User can report pollution, providing GPS coordinates and the type of pollution. To complete the report, users must also send evidence media files, such as short videos or photos of the affected area. They can also include a description of the pollution, severity, impact on the environment and people's health.
+- Reviewing report: Once a report has been created, an actual team member will review pollution reports based on the number of upvotes and downvotes they receive. The employee will take into account various factors such as the veracity of the report, the potential impact of the pollution on the environment and public health, and the urgency of the situation. Based on this evaluation, they will approve or cancel the report and determine the necessary steps for cleanup. This may involve calculating the amount of funds required, identifying the most suitable cleanup method, and providing a detailed description of the pollution entity.
+- Upvote/Downvote system: Used to validate the accuracy and urgency of pollution reports. Users can upvote reports that they believe are genuine and require immediate action, and downvote reports that they believe are fake or not urgent.
+- Cleanup handling: If the pollution is small, it can be cleaned up by a volunteer group. Otherwise, a specific organization should handle it because they have the necessary equipment and experience. For example, volunteer groups can tackle plastic pollution in forests, but plastic pollution in oceans or rivers should be handled by an organization. The organization may also be responsible for determining the best method of cleanup, such as using specialized equipment or chemicals.
+- Displaying pollution entities: After a new pollution entity has been created, all users and organizations can see it on the map/list and start taking action, such as organizing a volunteer group if it's a small pollution or contributing to a specific organization. Users can also leave comments, suggestions, or ideas on how to tackle the pollution, and the app or website may also provide additional resources or information on the issue.
 
 ### **Organization Module:**
 
