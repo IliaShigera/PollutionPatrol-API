@@ -2,14 +2,13 @@ namespace PollutionPatrol.BuildingBlocks.Media.Access.Abstractions;
 
 public interface IExternalMediaStorageAccessor
 {
-    Task<string> UploadMediaAsync(
-        Stream media,
-        Prefixes prefix,
-        string fileName,
-        string? folder = default,
+    Task<MediaKey> UploadMediaAsync(
+        Stream mediaStream,
+        string mediaName,
+        IReadOnlyList<string>? folderStructure = default,
         CancellationToken cancellationToken = default);
 
-    Task RemoveMediaAsync(string mediaKey, CancellationToken cancellationToken = default);
-    Task<string?> GetMediaUrlAsync(string mediaKey, CancellationToken cancellationToken = default);
-    Task<Stream> LoadMediaAsync(string mediaKey, CancellationToken cancellationToken = default);
+    Task RemoveMediaAsync(MediaKey mediaKey, CancellationToken cancellationToken = default);
+    Task<string?> GetMediaUrlAsync(MediaKey mediaKey, CancellationToken cancellationToken = default);
+    Task<Stream> LoadMediaAsync(MediaKey mediaKey, CancellationToken cancellationToken = default);
 }

@@ -11,55 +11,63 @@ internal sealed class DropBoxStorageAccessor : IDropBoxStorageAccessor
         _client = new DropboxClient(dropBox.AuthToken);
     }
 
-    public async Task<string> UploadMediaAsync(
-        Stream media,
-        Prefixes prefix,
-        string fileName,
-        string? folder = default,
+    public async Task<MediaKey> UploadMediaAsync(
+        Stream mediaStream,
+        string mediaName,
+        IReadOnlyList<string>? folderStructure = default,
         CancellationToken cancellationToken = default)
     {
-        if (media is null)
-            throw new ArgumentNullException(nameof(media), "Media is required and cannot be null or empty.");
+        if (mediaStream is null)
+            throw new ArgumentNullException(nameof(mediaStream), "Media is required and cannot be null or empty.");
 
-        var fileMetadata = await _client.Files.UploadAsync(
-            GetMediaPath(prefix, fileName, folder),
+        if (string.IsNullOrWhiteSpace(mediaName))
+            throw new ArgumentNullException(nameof(mediaName), "Media name is required and cannot be null or empty.");
+
+        var mediaMetadata = await _client.Files.UploadAsync(
+            path: GetMediaPath(mediaName, folderStructure),
             mode: WriteMode.Overwrite.Instance,
-            body: media);
+            body: mediaStream);
 
-        return fileMetadata.PathDisplay;
+        return new MediaKey(mediaMetadata.PathDisplay);
     }
 
-    public async Task RemoveMediaAsync(string mediaKey, CancellationToken cancellationToken = default)
+    public async Task RemoveMediaAsync(MediaKey mediaKey, CancellationToken cancellationToken = default)
     {
-        if (mediaKey is null)
+        if (mediaKey is null || string.IsNullOrWhiteSpace(mediaKey.Value))
             throw new ArgumentNullException(nameof(mediaKey), "Media key is required and cannot be null or empty.");
 
-        await _client.Files.DeleteV2Async(mediaKey);
+        await _client.Files.DeleteV2Async(mediaKey.Value);
     }
 
-    public async Task<string?> GetMediaUrlAsync(string mediaKey, CancellationToken cancellationToken = default)
+    public async Task<string?> GetMediaUrlAsync(MediaKey mediaKey, CancellationToken cancellationToken = default)
     {
-        if (mediaKey is null)
-            throw new ArgumentNullException(nameof(mediaKey), "Media key is required and cannot be null or empty.");
-
-        var existingSharedLinks = await _client.Sharing.ListSharedLinksAsync(mediaKey);
+        var existingSharedLinks = await _client.Sharing.ListSharedLinksAsync(mediaKey.Value);
         var sharedLinkMetadata = existingSharedLinks.Links.FirstOrDefault() ??
-                                 await _client.Sharing.CreateSharedLinkWithSettingsAsync(mediaKey);
+                                 await _client.Sharing.CreateSharedLinkWithSettingsAsync(mediaKey.Value);
 
         return sharedLinkMetadata.Url;
     }
 
-    public async Task<Stream> LoadMediaAsync(string mediaKey, CancellationToken cancellationToken = default)
+    public async Task<Stream> LoadMediaAsync(MediaKey mediaKey, CancellationToken cancellationToken = default)
     {
-        if (mediaKey is null)
+        if (mediaKey is null || string.IsNullOrWhiteSpace(mediaKey.Value))
             throw new ArgumentNullException(nameof(mediaKey), "Media key is required and cannot be null or empty.");
 
-        var response = await _client.Files.DownloadAsync(mediaKey);
+        var response = await _client.Files.DownloadAsync(mediaKey.Value);
         return await response.GetContentAsStreamAsync();
     }
 
-    private string GetMediaPath(Prefixes prefix, string fileName, string? folder) =>
-        string.IsNullOrWhiteSpace(folder)
-            ? $"/{prefix}_{fileName}"
-            : $"/{prefix}_{folder}/{fileName}";
+    private string GetMediaPath(string mediaName, IReadOnlyList<string>? folderStructure)
+    {
+        var path = new StringBuilder("/");
+
+        if (folderStructure is not null && folderStructure.Any())
+            foreach (var folder in folderStructure)
+                path.AppendLine($"{folder}/");
+
+        path.AppendLine($"{Guid.NewGuid()}");
+        path.AppendLine(mediaName);
+
+        return string.Concat(path);
+    }
 }
