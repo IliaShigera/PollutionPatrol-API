@@ -7,7 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\BuildingBlocks\Media\PollutionPatrol.BuildingBlocks.Media.Access.Abstractions\PollutionPatrol.BuildingBlocks.Media.Access.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\BuildingBlocks\PollutionPatrol.BuildingBlocks.Domain\PollutionPatrol.BuildingBlocks.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="7.0.4" />
     </ItemGroup>
 
 </Project>
