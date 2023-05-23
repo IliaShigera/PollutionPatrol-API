@@ -10,6 +10,8 @@ internal sealed class PollutionDbContext : DbContext, IPollutionDbContext
         _eventsDispatcher = eventsDispatcher;
     }
 
+    public DbSet<PollutionReport> Reports { get; private set; }
+
     public async Task CommitAsync(CancellationToken cancellationToken = default)
     {
         await SaveChangesAsync(cancellationToken);
@@ -20,6 +22,7 @@ internal sealed class PollutionDbContext : DbContext, IPollutionDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new EntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new PollutionReportEntityTypeConfiguration());
         base.OnModelCreating(modelBuilder);
     }
 }

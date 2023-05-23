@@ -2,12 +2,12 @@
 
 public static class DependencyInjection
 {
-    public static void AddSupportModule(this IServiceCollection services, IConfiguration configuration)
+    public static void AddPollutionModule(this IServiceCollection services, IConfiguration configuration)
     {
         var connection = configuration.GetConnectionString("Pollution");
 
         services.AddDbContext<PollutionDbContext>(options =>
-            options.UseSqlServer(connection));
+            options.UseNpgsql(connection, x => x.UseNetTopologySuite()));
 
         services.AddMediatR(x => x.RegisterServicesFromAssemblies(
                 Assembly.Load("PollutionPatrol.Modules.Pollution.Application"),

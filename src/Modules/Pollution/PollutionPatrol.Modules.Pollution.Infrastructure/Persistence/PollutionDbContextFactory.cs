@@ -12,7 +12,7 @@ internal sealed class PollutionDbContextFactory : IDesignTimeDbContextFactory<Po
         var connection = config.GetConnectionString("Pollution");
 
         var optionsBuilder = new DbContextOptionsBuilder<PollutionDbContext>();
-        optionsBuilder.UseSqlServer(connection);
+        optionsBuilder.UseNpgsql(connection, x => x.UseNetTopologySuite());
 
         return new PollutionDbContext(optionsBuilder.Options, eventsDispatcher: default);
     }
