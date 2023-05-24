@@ -24,11 +24,12 @@ internal sealed class DropBoxStorageAccessor : IDropBoxStorageAccessor
             throw new ArgumentNullException(nameof(mediaName), "Media name is required and cannot be null or empty.");
 
         var mediaMetadata = await _client.Files.UploadAsync(
-            path: GetMediaPath(mediaName, folderStructure),
+            path: CreateMediaPath(mediaName, folderStructure),
             mode: WriteMode.Overwrite.Instance,
             body: mediaStream);
 
-        return new MediaKey(mediaMetadata.PathDisplay);
+        var keyValue = mediaMetadata.PathDisplay[1..]; // removing '/' at the beginning of a string
+        return new MediaKey(keyValue);
     }
 
     public async Task RemoveMediaAsync(MediaKey mediaKey, CancellationToken cancellationToken = default)
@@ -36,14 +37,14 @@ internal sealed class DropBoxStorageAccessor : IDropBoxStorageAccessor
         if (mediaKey is null || string.IsNullOrWhiteSpace(mediaKey.Value))
             throw new ArgumentNullException(nameof(mediaKey), "Media key is required and cannot be null or empty.");
 
-        await _client.Files.DeleteV2Async(mediaKey.Value);
+        await _client.Files.DeleteV2Async($"/{mediaKey.Value}");
     }
 
     public async Task<string?> GetMediaUrlAsync(MediaKey mediaKey, CancellationToken cancellationToken = default)
     {
-        var existingSharedLinks = await _client.Sharing.ListSharedLinksAsync(mediaKey.Value);
+        var existingSharedLinks = await _client.Sharing.ListSharedLinksAsync($"/{mediaKey.Value}");
         var sharedLinkMetadata = existingSharedLinks.Links.FirstOrDefault() ??
-                                 await _client.Sharing.CreateSharedLinkWithSettingsAsync(mediaKey.Value);
+                                 await _client.Sharing.CreateSharedLinkWithSettingsAsync($"/{mediaKey.Value}");
 
         return sharedLinkMetadata.Url;
     }
@@ -53,20 +54,20 @@ internal sealed class DropBoxStorageAccessor : IDropBoxStorageAccessor
         if (mediaKey is null || string.IsNullOrWhiteSpace(mediaKey.Value))
             throw new ArgumentNullException(nameof(mediaKey), "Media key is required and cannot be null or empty.");
 
-        var response = await _client.Files.DownloadAsync(mediaKey.Value);
+        var response = await _client.Files.DownloadAsync($"/{mediaKey.Value}");
         return await response.GetContentAsStreamAsync();
     }
 
-    private string GetMediaPath(string mediaName, IReadOnlyList<string>? folderStructure)
+    private string CreateMediaPath(string mediaName, IReadOnlyList<string>? folderStructure)
     {
         var path = new StringBuilder("/");
 
         if (folderStructure is not null && folderStructure.Any())
             foreach (var folder in folderStructure)
-                path.AppendLine($"{folder}/");
+                path.Append($"{folder}/");
 
-        path.AppendLine($"{Guid.NewGuid()}");
-        path.AppendLine(mediaName);
+        path.Append($"{Guid.NewGuid()}");
+        path.Append(Path.GetExtension(mediaName));
 
         return string.Concat(path);
     }
