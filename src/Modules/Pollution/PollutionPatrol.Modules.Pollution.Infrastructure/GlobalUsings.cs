@@ -11,6 +11,7 @@ global using Microsoft.Extensions.DependencyInjection;
 global using PollutionPatrol.BuildingBlocks.Domain.Models;
 global using PollutionPatrol.BuildingBlocks.Infrastructure.DomainEventsDispatching;
 global using PollutionPatrol.Modules.Pollution.Application.Contracts;
+global using PollutionPatrol.Modules.Pollution.Application.MapConfig;
 global using PollutionPatrol.Modules.Pollution.Application.SeedWork.Command;
 global using PollutionPatrol.Modules.Pollution.Application.SeedWork.Pipelines;
 global using PollutionPatrol.Modules.Pollution.Application.SeedWork.Query;

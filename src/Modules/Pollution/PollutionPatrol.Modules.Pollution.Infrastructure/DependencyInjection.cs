@@ -14,9 +14,11 @@ public static class DependencyInjection
                 Assembly.Load("PollutionPatrol.Modules.Pollution.Infrastructure"))
             .AddOpenBehavior(typeof(LoggingPipelineBehaviour<,>))
             .AddOpenBehavior(typeof(ValidationPipelineBehaviour<,>)));
-
+        
         services.AddValidatorsFromAssembly(Assembly.Load("PollutionPatrol.Modules.Pollution.Application"), includeInternalTypes: true);
 
+        services.AddMapsterConfiguration();
+        
         services.AddTransient<IPollutionModule, PollutionModule>();
         services.AddScoped<IPollutionDbContext, PollutionDbContext>();
     }

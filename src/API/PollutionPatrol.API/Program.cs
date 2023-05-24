@@ -1,5 +1,3 @@
-using PollutionPatrol.BuildingBlocks.Media.Access;
-
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateBootstrapLogger();
@@ -56,6 +54,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddExternalMediaStorageAccess();
     services.AddEmailNotifications();
     services.AddUserAccessModule(configuration);
+    services.AddPollutionModule(configuration);
 }
 
 

@@ -6,14 +6,14 @@ public sealed class PollutionType : ValueObject
     
     public string Value { get; init; }
 
-    public PollutionType Soil => new(nameof(Soil));
-    public PollutionType Watter => new(nameof(Watter));
-    public PollutionType Air => new(nameof(Air));
-    public PollutionType Plastic => new(nameof(Plastic));
-    public PollutionType Microplastic => new(nameof(Microplastic));
-    public PollutionType Noise => new(nameof(Noise));
-    public PollutionType Visual => new(nameof(Visual));
-    public PollutionType Industrial => new(nameof(Industrial));
+    public static PollutionType Soil => new(nameof(Soil));
+    public static PollutionType Watter => new(nameof(Watter));
+    public static PollutionType Air => new(nameof(Air));
+    public static PollutionType Plastic => new(nameof(Plastic));
+    public static PollutionType Microplastic => new(nameof(Microplastic));
+    public static PollutionType Noise => new(nameof(Noise));
+    public static PollutionType Visual => new(nameof(Visual));
+    public static PollutionType Industrial => new(nameof(Industrial));
     
     protected override IEnumerable<object> GetEqualityComponents()
     {
