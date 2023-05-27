@@ -16,14 +16,30 @@ internal sealed class VoteManager : IVoteManager
             await _voteStore.Votes.AddAsync(vote, cancellationToken);
             await _voteStore.SaveChangesAsync(cancellationToken);
         }
+        
+        if (vote.VoteType is VoteType.Down)
+        {
+            _voteStore.Votes.Remove(vote);
+            vote = new Abstractions.Vote(itemId, voterId, VoteType.Up);
+            await _voteStore.Votes.AddAsync(vote, cancellationToken);
+            await _voteStore.SaveChangesAsync(cancellationToken);
+        }
     }
 
     public async Task DownVoteAsync(Guid itemId, Guid voterId, CancellationToken cancellationToken = default)
     {
         var vote = await GetVote(itemId, voterId, cancellationToken);
-        
+
         if (vote is null)
         {
+            vote = new Abstractions.Vote(itemId, voterId, VoteType.Down);
+            await _voteStore.Votes.AddAsync(vote, cancellationToken);
+            await _voteStore.SaveChangesAsync(cancellationToken);
+        }
+
+        if (vote.VoteType is VoteType.Up)
+        {
+            _voteStore.Votes.Remove(vote);
             vote = new Abstractions.Vote(itemId, voterId, VoteType.Down);
             await _voteStore.Votes.AddAsync(vote, cancellationToken);
             await _voteStore.SaveChangesAsync(cancellationToken);
