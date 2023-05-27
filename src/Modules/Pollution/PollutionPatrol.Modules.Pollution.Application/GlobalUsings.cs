@@ -13,6 +13,7 @@ global using Newtonsoft.Json;
 global using PollutionPatrol.BuildingBlocks.Application.Exceptions;
 global using PollutionPatrol.BuildingBlocks.Application.Interfaces;
 global using PollutionPatrol.BuildingBlocks.Media.Access.Abstractions;
+global using PollutionPatrol.BuildingBlocks.Vote.Abstractions;
 global using PollutionPatrol.Modules.Pollution.Application.Contracts;
 global using PollutionPatrol.Modules.Pollution.Application.Features.Report;
 global using PollutionPatrol.Modules.Pollution.Application.SeedWork.Command;

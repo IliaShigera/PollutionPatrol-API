@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\BuildingBlocks\PollutionPatrol.BuildingBlocks.Application\PollutionPatrol.BuildingBlocks.Application.csproj" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\Vote\PollutionPatrol.BuildingBlocks.Vote.Abstractions\PollutionPatrol.BuildingBlocks.Vote.Abstractions.csproj" />
       <ProjectReference Include="..\PollutionPatrol.Modules.Pollution.Domain\PollutionPatrol.Modules.Pollution.Domain.csproj" />
     </ItemGroup>
 
