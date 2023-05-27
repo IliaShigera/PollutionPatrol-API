@@ -20,6 +20,7 @@ global using PollutionPatrol.BuildingBlocks.Domain.Exceptions;
 global using PollutionPatrol.BuildingBlocks.Infrastructure;
 global using PollutionPatrol.BuildingBlocks.Media.Access;
 global using PollutionPatrol.BuildingBlocks.Notification.Email;
+global using PollutionPatrol.BuildingBlocks.Vote.Abstractions;
 global using PollutionPatrol.BuildingBlocks.Vote.Service;
 global using PollutionPatrol.Modules.Pollution.Application.Contracts;
 global using PollutionPatrol.Modules.Pollution.Application.Features.Report;
