@@ -53,6 +53,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddBuildingBlocks(configuration);
     services.AddExternalMediaStorageAccess();
     services.AddEmailNotifications();
+    services.AddVoteService(configuration);
     services.AddUserAccessModule(configuration);
     services.AddPollutionModule(configuration);
 }
